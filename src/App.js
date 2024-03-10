@@ -14,10 +14,9 @@ function App() {
     <div className='bg-neutral-300'>
       <BrowserRouter> 
         <Routes>
-          <Route path="/" element={<Login/>} >
-            <Route path="/home" element={<Home/>} />
-            <Route path="/profile" element={<Profile/>} />
-          </Route>  
+          <Route path="/" element={<Login/>} /> 
+          <Route path="/home" element={<Home/>} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="*" element={<NotFound />} />
           <Route path="/register" element={<Register/>} />     
         </Routes>
