@@ -1,0 +1,45 @@
+{
+    "MyMusic" : [
+        {
+            "id": 1,
+            "title": "รักแอบๆ",
+            "artist": "SNAPROCKER",
+            "art_work" : "" ,
+            "file_music" : "",
+            "faverite" : false
+        },
+        {
+            "id": 2,
+            "title": "อยากลืมแต่ลืมไม่ลง",
+            "artist": "SNAPROCKER",
+            "art_work" : "" ,
+            "file_music" : "",
+            "faverite" : false
+        },
+        {
+            "id": 3,
+            "title": "กอดก่อนเธอ",
+            "artist": "SNAPROCKER",
+            "art_work" : "" ,
+            "file_music" : "",
+            "faverite" : false
+        },
+        {
+            "id": 4,
+            "title": "อาจจะดูโง่ๆ",
+            "artist": "SNAPROCKER",
+            "art_work" : "" ,
+            "file_music" : "",
+            "faverite" : false
+        },
+        {
+            "id": 5,
+            "title": "ไม่ได้เป็นคนเจ้าชู้ (ฮู้ว ฮูว)",
+            "artist": "SNAPROCKER",
+            "art_work" : "" ,
+            "file_music" : "",
+            "faverite" : false
+        }
+    ]
+}
+
