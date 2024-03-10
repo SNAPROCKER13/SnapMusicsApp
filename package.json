@@ -2,7 +2,7 @@
   "name": "snap-musics",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://snaprocker13.github.io/snapMusicsApp",
+  "homepage": "https://snaprocker13.github.io/",
   "dependencies": {
     "@mui/base": "^5.0.0-beta.38",
     "@testing-library/jest-dom": "^5.17.0",
