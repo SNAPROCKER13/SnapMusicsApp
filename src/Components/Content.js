@@ -13,7 +13,7 @@ const Content = () => {
     },[])
 
     return(
-        <div className='grid grid-cols-3 gap-x-64 gap-y-32'>
+        <div className='grid desktop:grid-cols-3 laptop:grid-cols-2 gap-36'>
            {MyMusics.map((MyMusic, index) => 
             <Card key={index} MyMusic={MyMusic}/>
            )}
