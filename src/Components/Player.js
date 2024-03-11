@@ -1,6 +1,6 @@
 const Player = () => {
     return(
-        <div className="flex items-center justify-between w-full bg-white flex-row border-2 border-black px-12 h-24">
+        <div className="px-12 border-2 border-black flex fixed  bottom-0 items-center justify-between w-full bg-white desktop:flex-row desktop:h-24 laptop:flex-row laptop:h-24 tablet:flex-col tablet:h-64 tablet:p-8 ">
             <div>
                 <div className="w-24 h-24 bg-sky-400"></div>
             </div>

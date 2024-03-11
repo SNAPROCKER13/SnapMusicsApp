@@ -6,10 +6,10 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
-      'tablet': '640px',
+      'tablet': '340px',
       // => @media (min-width: 640px) { ... }
 
-      'laptop': '1024px',
+      'laptop': '900px',
       // => @media (min-width: 1024px) { ... }
 
       'desktop': '1280px',

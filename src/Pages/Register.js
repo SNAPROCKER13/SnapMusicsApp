@@ -111,7 +111,7 @@ const Register = () => {
 
     return(
         <div className="flex justify-center items-center h-screen">
-            <div className="w-1/4 bg-white flex flex-col justify-center items-center rounded-xl border-2 border-black">
+            <div className="w-2/5 bg-white flex flex-col justify-center items-center rounded-xl border-2 border-black">
                 <div className="bg-sky-400 py-4 w-full rounded-lg border-2 border-black" >
                     <p className="text-white text-center">Sign-up</p>
                 </div>

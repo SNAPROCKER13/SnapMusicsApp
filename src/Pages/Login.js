@@ -68,10 +68,10 @@ const Login = () => {
         <div className="flex flex-col items-center justify-center h-screen ">
 
             <div className="my-10">
-                <h1 className="text-sky-400 text-center font-bold text-2xl">SNAPMUSICS</h1>
+                <h1 className="text-sky-400 text-center font-bold desktop:text-3xl laptop:text-2xl">SNAPMUSICS</h1>
             </div>
           
-            <div className="w-1/4 bg-white flex flex-col items-center rounded-xl border-2 border-black">
+            <div className="w-2/5 bg-white flex flex-col items-center rounded-xl border-2 border-black">
                 <div className="bg-sky-400 py-4 w-full rounded-lg border-2 border-black">
                     <p className="text-white text-center">Sign-in</p>
                 </div>
