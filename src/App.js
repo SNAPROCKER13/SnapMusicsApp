@@ -14,7 +14,7 @@ function App() {
     <div className='bg-neutral-300'>
       <BrowserRouter> 
         <Routes>
-          <Route path="/" element={<Login/>} />
+          <Route exact path="/" element={<Login/>} />
           <Route path="/register" element={<Register/>} />  
           <Route path="/home" element={<Home/>} />
           <Route path="/profile" element={<Profile/>} />
