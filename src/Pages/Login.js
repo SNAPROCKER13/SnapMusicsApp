@@ -49,7 +49,7 @@ const Login = () => {
                 passInput : false,
             })
 
-            if((password === 'ilovemusics' &&  user === "snaprocker") || (password === JSON.parse(localStorage.getItem('user'))?.password) && user === JSON.parse(localStorage.getItem('user'))?.username){
+            if((password === 'ilovemusics' &&  user === "snaprocker") || (password === JSON.parse(localStorage.getItem('user'))?.password && user === JSON.parse(localStorage.getItem('user'))?.username)){
                 navigate('/home')
             }else{
                 setValidate({failed : true})
