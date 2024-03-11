@@ -1,5 +1,4 @@
 import './App.css';
-
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 //import pages
@@ -10,15 +9,15 @@ import Profile from './Pages/Profile'
 import NotFound from './Pages/NotFound';
 
 function App() {
+
   return (
     <div className='bg-neutral-300'>
       <BrowserRouter> 
         <Routes>
-          <Route exact path="/" element={<Login/>} >
-            <Route path="/home" element={<Home/>} />
-            <Route path="/profile" element={<Profile/>} />
-          </Route>  
+          <Route path="/" element={<Login/>} />
           <Route path="/register" element={<Register/>} />  
+          <Route path="/home" element={<Home/>} />
+          <Route path="/profile" element={<Profile/>} />
           <Route path="*" element={<NotFound />} />
         </Routes>
      </BrowserRouter>
