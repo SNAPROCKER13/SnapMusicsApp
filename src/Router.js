@@ -11,7 +11,7 @@ const Router = () => {
 
   const [isLogin, setIsLogin] = useState(false)
 
-  const pagesData =  [
+  const pagesData = [
     {
       path: "/*",
       element: <Login setIsLogin={setIsLogin}/>,
@@ -43,6 +43,7 @@ const Router = () => {
   });
 
   return <Routes>{pageRoutes}</Routes>;
+
 };
 
 export default Router;
