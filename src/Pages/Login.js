@@ -49,7 +49,7 @@ const Login = () => {
                 passInput : false,
             })
 
-            if((password === 'ilovemusics' &&  user === "snaprocker") || (password == JSON.parse(localStorage.getItem('user'))?.password) && user === JSON.parse(localStorage.getItem('user'))?.username){
+            if((password === 'ilovemusics' &&  user === "snaprocker") || (password === JSON.parse(localStorage.getItem('user'))?.password) && user === JSON.parse(localStorage.getItem('user'))?.username){
                 navigate('/home')
             }else{
                 setValidate({failed : true})
@@ -76,9 +76,9 @@ const Login = () => {
                     <p className="text-white text-center">Sign-in</p>
                 </div>
                 {validate.failed === true ? <p className="text-red-500 mt-5">ชื่อผู้ใช้ / รหัสผ่าน ไม่ถูกต้อง !</p> : ""}
-                <input onChange={(e)=>onUser(e)} onKeyDown={(e) => {onEnter(e)}}  placeholder="ชื่อผู้ใช้" className={validate.userInput == true ? "w-1/2 border-2 border-black mt-5 rounded-md" : "w-1/2 border-2 border-black my-5 rounded-md"} type="text"/>
+                <input onChange={(e)=>onUser(e)} onKeyDown={(e) => {onEnter(e)}}  placeholder="ชื่อผู้ใช้" className={validate.userInput === true ? "w-1/2 border-2 border-black mt-5 rounded-md" : "w-1/2 border-2 border-black my-5 rounded-md"} type="text"/>
                 {validate.userInput === true ? <p className="text-red-500 mb-5">กรุณากรอกชื่อผู้ใช้ !</p> : ""}
-                <input onChange={(e)=>onPassword(e)} onKeyDown={(e) => {onEnter(e)}}  placeholder="รหัสผ่าน" className={validate.passInput == true ? "w-1/2 border-2 border-black rounded-md": "w-1/2 border-2 border-black rounded-md mb-5"} type="password"/>
+                <input onChange={(e)=>onPassword(e)} onKeyDown={(e) => {onEnter(e)}}  placeholder="รหัสผ่าน" className={validate.passInput === true ? "w-1/2 border-2 border-black rounded-md": "w-1/2 border-2 border-black rounded-md mb-5"} type="password"/>
                 {validate.passInput === true ?<p className="text-red-500 mb-5">กรุณากรอกรหัสผ่าน !</p> :""}             
                 <button 
                 onClick={()=>onLogin()}  
