@@ -1,5 +1,6 @@
 import { Link, useNavigate} from "react-router-dom";
 import {useState} from 'react'
+import { postUsers } from '../services/PostUserAPI'
 
 const Register = () => {
     const navigate = useNavigate();
@@ -10,8 +11,7 @@ const Register = () => {
         userInput : false,
         passInput : false,
         rePassInput : false,
-        failed : false,
-        
+        failed : false,     
     })
 
     const onUser = (e) => {
@@ -32,7 +32,6 @@ const Register = () => {
     }
 
     const onRegister = () => {
-        console.log("click")
 
         if(password === "" && user === "" && rePassword === ""){
             setValidate({
@@ -91,10 +90,7 @@ const Register = () => {
             })
 
             if(password === rePassword){
-                localStorage.setItem('user', JSON.stringify({
-                    username: user,
-                    password: password,
-                }))
+                postUsers(user,password)
                 navigate('/')
             }else{
                 setValidate({failed : true})

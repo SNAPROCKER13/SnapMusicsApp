@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react';
-import Card from '../Components/Card' 
-import  {getMyMusics}  from '../Services/API';
+import Card from './Card' 
+import  {getMyMusics}  from '../services/GetMyMusicsAPI';
 
 const Content = () => {
 

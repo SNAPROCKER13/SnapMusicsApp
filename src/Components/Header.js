@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const Header = () => {
+const Header = ({setIsLogin}) => {
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -11,7 +11,11 @@ const Header = () => {
             </div>
             <div className="flex flex-row justify-center items-center">
                 {location.pathname !== '/profile' ? <Link to="/profile"><div className="bg-white rounded-full my-14 w-16 h-16 flex justify-center items-center border-2 border-black mx-6">Profile</div></Link>: <button onClick={() => navigate(-1)} className="border-2 border-black rounded-lg h-max w-max text-black mx-6">Back</button>}
-                <button onClick={() => navigate('/')}className="border-2 bg-sky-400 rounded-lg h-max w-max text-white">Log Out</button>
+                <button onClick={() => {
+                    setIsLogin(false)
+                    navigate('/*')
+                }}
+                className="border-2 bg-sky-400 rounded-lg h-max w-max text-white">Log Out</button>
             </div>
         </div>
     )

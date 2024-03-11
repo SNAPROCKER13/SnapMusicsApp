@@ -1,13 +1,13 @@
-import Header from '../Components/Header'
-import Content from '../Components/Content'
-import Player from '../Components/Player'
+import Header from '../components/Header'
+import Content from '../components/Content'
+import Player from '../components/Player'
 
-const Home = () => {
+const Home = ({setIsLogin}) => {
 
     return(
         <div className="h-full flex flex-col items-center">
             <div className='w-full'>
-                <Header/>
+                <Header  setIsLogin={setIsLogin}/>
             </div>
             <div className='my-12 w-full text-center'>
                 <input className="border-2 border-black-300 rounded-lg border-2 mx-6 w-6/12" placeholder='  ค้นหา'/>

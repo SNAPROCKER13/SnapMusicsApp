@@ -1,7 +1,9 @@
 import { Link, useNavigate} from "react-router-dom";
 import {useState} from 'react'
+import bcrypt from 'bcryptjs'
+import { getUsers } from '../services/PostUserAPI'
 
-const Login = () => {
+const Login = ({setIsLogin}) => {
     const navigate = useNavigate();
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
@@ -23,7 +25,7 @@ const Login = () => {
         setPassword(pass)
     }
 
-    const onLogin = () => {
+    const onLogin = async () => {
 
         if(password === "" && user === ""){
             setValidate({
@@ -49,12 +51,31 @@ const Login = () => {
                 passInput : false,
             })
 
-            if((password === 'ilovemusics' &&  user === "snaprocker") || (password === JSON.parse(localStorage.getItem('user'))?.password && user === JSON.parse(localStorage.getItem('user'))?.username)){
-                navigate('/home')
+            const dataUser = await getUsers().then((res)=>
+                res.data
+            ).catch(
+                (err) => console.log(err)
+            )
+
+            const userFilter = await dataUser.filter(item => {
+                if(user === item.username){
+                    return item
+                }
+            })
+
+            console.log(userFilter[0])
+
+            if(userFilter[0] != undefined){
+                const match = await bcrypt.compare(password, userFilter[0].password)
+                if(match === true){
+                    setIsLogin(true)
+                    navigate('/home')
+                }else{
+                    setValidate({failed : true})
+                }
             }else{
                 setValidate({failed : true})
             }
-           
         }
     }
 
