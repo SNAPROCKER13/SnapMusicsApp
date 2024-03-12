@@ -2,10 +2,10 @@ import { Route, Routes} from "react-router-dom";
 import {useState} from 'react'
 
 //import pages
-import Home from './pages/Home'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Profile from './pages/Profile'
+import Home from './Pages/Home'
+import Login from './Pages/Login'
+import Register from './Pages/Register'
+import Profile from './Pages/Profile'
 
 const Router = () => {
 

@@ -1,6 +1,6 @@
-import Header from '../components/Header'
-import Content from '../components/Content'
-import Player from '../components/Player'
+import Header from '../Components/Header'
+import Content from '../Components/Content'
+import Player from '../Components/Player'
 
 const Home = ({setIsLogin}) => {
 
