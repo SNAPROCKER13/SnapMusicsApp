@@ -1,5 +1,5 @@
 import axios from "axios";
-import bcrypt from 'bcryptjs'
+import bcrypt from "bcryptjs";
 
 export const postUsers = async (user,password) => {
     const saltRounds = 10;

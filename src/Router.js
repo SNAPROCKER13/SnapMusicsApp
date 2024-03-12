@@ -34,10 +34,10 @@ const Router = () => {
     },
   ] 
 
-  const pageRoutes = pagesData.map(({ path, element, isPivate },idx ) => {
+  const pageRoutes = pagesData.map(({ path, element, isPivate }, idx ) => {
         
         if(isPivate === false){
-            return <Route key={idx} path={`${path}`} element={element} />;
+            return <Route key={idx} path={`${path}`} element={element} />
         }
 
   });

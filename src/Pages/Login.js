@@ -1,6 +1,6 @@
 import { Link, useNavigate} from "react-router-dom";
 import {useState} from 'react'
-import bcrypt from 'bcryptjs'
+import bcrypt from "bcryptjs";
 import { getUsers } from '../services/PostUserAPI'
 
 const Login = ({setIsLogin}) => {
@@ -58,14 +58,14 @@ const Login = ({setIsLogin}) => {
             )
 
             const userFilter = await dataUser.filter(item => {
-                if(user === item.username){
+                if(user === item?.username){
                     return item
                 }
-            })
+            });
 
             console.log(userFilter[0])
 
-            if(userFilter[0] != undefined){
+            if(userFilter[0] !== undefined){
                 const match = await bcrypt.compare(password, userFilter[0].password)
                 if(match === true){
                     setIsLogin(true)
