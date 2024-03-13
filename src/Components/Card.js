@@ -1,8 +1,27 @@
-const Card = ({MyMusic}) => {
+import oneImage from '../Assets/image/1.jpg'
+import twoImage from '../Assets/image/2.jpg'
+import theeImage from '../Assets/image/3.jpg'
+import fourImage from '../Assets/image/4.jpg'
+import fiveImage from '../Assets/image/5.jpg'
+import sixImage from '../Assets/image/6.jpg'
+
+const Card = ({MyMusic,setPlayId}) => {
+
+    const artWork = MyMusic.art_work == 'oneImage' ? oneImage : 
+    MyMusic.art_work == 'twoImage' ? twoImage : 
+    MyMusic.art_work == 'theeImage' ? theeImage :
+    MyMusic.art_work == 'fourImage' ? fourImage :
+    MyMusic.art_work == 'fiveImage' ? fiveImage :
+    MyMusic.art_work == 'sixImage' ? sixImage : ""
+
     return (
         <div className="bg-white w-80 flex flex-col justify-center items-center p-4 rounded-lg">
             <div className="bg-sky-400 w-72 h-72 text-center text-white flex justify-center items-center rounded-lg">
-                <h1>{MyMusic.art_work}</h1>
+                <img 
+                    src={artWork} alt="artwork" 
+                    className='h-full rounded-lg'
+                    onClick={()=>setPlayId(MyMusic.id)}
+                ></img>
             </div>
             <div className="my-6 pt-4">
                 <h1>{MyMusic.title}</h1>

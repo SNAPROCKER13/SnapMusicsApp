@@ -1,44 +1,61 @@
 import { Route, Routes} from "react-router-dom";
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 
 //import pages
 import Home from './Pages/Home'
 import Login from './Pages/Login'
 import Register from './Pages/Register'
 import Profile from './Pages/Profile'
+import NotFound from './Pages/NotFound'
 
 const Router = () => {
 
-  const [isLogin, setIsLogin] = useState(false)
+  const [role, setRole] = useState('guest')
 
-  const pagesData = [
-    {
-      path: "/*",
-      element: <Login setIsLogin={setIsLogin}/>,
-      isPivate: isLogin
-    },
-    {
-      path: "/register",
-      element: <Register />,
-      isPivate: isLogin
-    },
-    {
-      path: "/home",
-      element: <Home setIsLogin={setIsLogin}/>,
-      isPivate: !isLogin
-    },
-    {
-      path: "/profile",
-      element: <Profile />,
-      isPivate: !isLogin
-    },
-  ] 
+  useEffect(() => {
+    const passed = localStorage.getItem("isLogin")
 
-  const pageRoutes = pagesData.map(({ path, element, isPivate }, idx ) => {
+    if(passed){
+      setRole('user')
+    }
+
+  },[])
+
+  const pagesData = {
+    user: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
+        },
+        {
+          path: "/*",
+          element: <NotFound />,
+        },
+      ],
+    guest: [
+        {
+        path: "/",
+        element: <Login />,
+        },
+        {
+          path: "/register",
+          element: <Register />,
+        },
+        {
+          path: "/*",
+          element: <NotFound />,
+        },
+    ]
+  }
+   
+
+  const pageRoutes = pagesData[role].map(({ path, element }, idx ) => {
         
-        if(isPivate === false){
-            return <Route key={idx} path={`${path}`} element={element} />
-        }
+      return <Route key={idx} path={`${path}`} element={element} />
 
   });
 

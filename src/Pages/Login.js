@@ -68,8 +68,8 @@ const Login = ({setIsLogin}) => {
             if(userFilter[0] !== undefined){
                 const match = await bcrypt.compare(password, userFilter[0].password)
                 if(match === true){
-                    setIsLogin(true)
-                    navigate('/home')
+                    localStorage.setItem("isLogin",true)
+                    window.location.reload()
                 }else{
                     setValidate({failed : true})
                 }
