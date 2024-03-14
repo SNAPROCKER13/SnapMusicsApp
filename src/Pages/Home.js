@@ -61,8 +61,10 @@ const Home = () => {
         }
     }
 
+    console.log(searchResult)
+
     return(
-        <div className="h-full flex flex-col items-center">
+        <div className={searchResult.length > 0 ? "h-full flex flex-col items-center" : "h-lvh flex flex-col items-center"}>
             <div className='w-full'>
                 <Header/>
             </div>
@@ -70,7 +72,7 @@ const Home = () => {
                 <input onChange={(e) => handleSearch(e)} onKeyDown={(e) => {onEnter(e)}} className="border-2 border-black-300 rounded-lg border-2 mx-6 w-6/12" placeholder='  ค้นหา'/>
                 <button onClick={() => handleFind()} className='border-2 border-black-300 rounded-lg bg-sky-400 text-white border-2 '>ค้นหา</button>
             </div>
-            <div className='h-screen'>
+            <div className={'h-full'}>
                 <Content searchResult={searchResult} setPlayId={setPlayId}/>
             </div>
             <div className='w-full'>

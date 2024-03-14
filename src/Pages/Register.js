@@ -1,6 +1,7 @@
 import { Link, useNavigate} from "react-router-dom";
 import {useState} from 'react'
 import { postUsers } from '../services/PostUserAPI'
+import { getUsers } from '../services/PostUserAPI'
 
 const Register = () => {
     const navigate = useNavigate();
@@ -11,7 +12,8 @@ const Register = () => {
         userInput : false,
         passInput : false,
         rePassInput : false,
-        failed : false,     
+        failed : false,  
+        userRepeat : false   
     })
 
     const onUser = (e) => {
@@ -31,7 +33,21 @@ const Register = () => {
         setRePassword(rePass)
     }
 
-    const onRegister = () => {
+    const onRegister = async () => {
+
+        const dataUser = await getUsers().then((res)=>
+        res.data
+        ).catch(
+            (err) => console.log(err)
+        )
+
+        const userFilter = await dataUser.filter(item => {
+            if(user === item?.username){
+                return item
+            }
+        });
+
+        console.log(userFilter[0] , dataUser)
 
         if(password === "" && user === "" && rePassword === ""){
             setValidate({
@@ -89,13 +105,18 @@ const Register = () => {
                 rePassInput : false
             })
 
-            if(password === rePassword){
-                postUsers(user,password)
-                navigate('/')
+            if(user === userFilter[0]?.username){
+                setValidate({
+                    userRepeat : true   
+                })
             }else{
-                setValidate({failed : true})
+                if(password === rePassword){
+                    postUsers(user,password)
+                    navigate('/')
+                }else{
+                    setValidate({failed : true})
+                }
             }
-           
         }
     }
 
@@ -113,7 +134,7 @@ const Register = () => {
                 </div>
                 
                 <div className="bg-sky-400 rounded-full my-14 text-white w-16 h-16 flex justify-center items-center">Photo</div>
-                {validate.failed === true ? <p className="text-red-500 mt-5">ชื่อผู้ใช้ / รหัสผ่าน ไม่ถูกต้อง !</p> : ""}
+                {validate.failed === true ? <p className="text-red-500 mt-5">ชื่อผู้ใช้ / รหัสผ่าน ไม่ถูกต้อง !</p> : validate.userRepeat === true ? <p className="text-red-500 mt-5">ไม่สามารถใช้ชื่อผู้ใช้นี้ได้</p> : ""}
                 <input placeholder="ชื่อผู้ใช้" onChange={(e)=>onUser(e)} onKeyDown={(e) => {onEnter(e)}} className={validate.userInput === true ? "w-1/2 border-2 border-black mt-5 rounded-md" : "w-1/2 border-2 border-black my-5 rounded-md"} type="text"/>
                 {validate.userInput === true ? <p className="text-red-500 mb-5">กรุณากรอกชื่อผู้ใช้ !</p> : ""}
                 <input placeholder="รหัสผ่าน" onChange={(e)=>onPassword(e)} onKeyDown={(e) => {onEnter(e)}} className={validate.passInput === true ? "w-1/2 border-2 border-black mt-5 rounded-md" : "w-1/2 border-2 border-black my-5 rounded-md"} type="password"/>

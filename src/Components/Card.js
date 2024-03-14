@@ -8,11 +8,11 @@ import sixImage from '../Assets/image/6.jpg'
 const Card = ({MyMusic,setPlayId}) => {
 
     const artWork = MyMusic?.art_work == 'oneImage' ? oneImage : 
-    MyMusic?.art_work == 'twoImage' ? twoImage : 
-    MyMusic?.art_work == 'theeImage' ? theeImage :
-    MyMusic?.art_work == 'fourImage' ? fourImage :
-    MyMusic?.art_work == 'fiveImage' ? fiveImage :
-    MyMusic?.art_work == 'sixImage' ? sixImage : ""
+    MyMusic?.art_work === 'twoImage' ? twoImage : 
+    MyMusic?.art_work === 'theeImage' ? theeImage :
+    MyMusic?.art_work === 'fourImage' ? fourImage :
+    MyMusic?.art_work === 'fiveImage' ? fiveImage :
+    MyMusic?.art_work === 'sixImage' ? sixImage : ""
 
     return (
         <div className="bg-white w-80 flex flex-col justify-center items-center p-4 rounded-lg">

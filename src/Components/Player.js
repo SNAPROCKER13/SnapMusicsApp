@@ -17,8 +17,8 @@ import sixImage from '../Assets/image/6.jpg'
 const Player = ({MyMusics,playId}) => {
 
     const [playSongs, setPlaySongs] = useState({})
-
-    console.log(playSongs?.file_music)
+    const [artWorkSong, setArtWorkSong] = useState({})
+    const [song, setSong] = useState({})
 
     useEffect(() => {
 
@@ -32,34 +32,32 @@ const Player = ({MyMusics,playId}) => {
 
         setPlaySongs(MyMusic[playId-1])
 
-    })
+        const artWork = playSongs?.art_work == 'oneImage' ? oneImage : 
+        playSongs?.art_work === 'twoImage' ? twoImage : 
+        playSongs?.art_work === 'theeImage' ? theeImage :
+        playSongs?.art_work === 'fourImage' ? fourImage :
+        playSongs?.art_work === 'fiveImage' ? fiveImage :
+        playSongs?.art_work === 'sixImage' ? sixImage : ""
 
-  
-    const artWork = playSongs?.art_work == 'oneImage' ? oneImage : 
-    playSongs?.art_work == 'twoImage' ? twoImage : 
-    playSongs?.art_work == 'theeImage' ? theeImage :
-    playSongs?.art_work == 'fourImage' ? fourImage :
-    playSongs?.art_work == 'fiveImage' ? fiveImage :
-    playSongs?.art_work == 'sixImage' ? sixImage : ""
+        setArtWorkSong(artWork)
 
+        const song = playSongs?.file_music == 'lovesecret' ? lovesecret : 
+        playSongs?.file_music === 'forget' ? forget : 
+        playSongs?.file_music === 'again' ? again :
+        playSongs?.file_music === 'fool' ? fool :
+        playSongs?.file_music === 'reason' ? reason :
+        playSongs?.file_music === 'brain' ? brain : ""
 
+        setSong(song)
 
-
-    const song = playSongs?.file_music == 'lovesecret' ? lovesecret : 
-    playSongs?.file_music == 'forget' ? forget : 
-    playSongs?.file_music == 'again' ? again :
-    playSongs?.file_music == 'fool' ? fool :
-    playSongs?.file_music == 'reason' ? reason :
-    playSongs?.file_music == 'brain' ? brain : ""
-    
-    console.log(song)
+    },[playId])
 
     return(
         <div className="px-12 border-2 border-black flex fixed  bottom-0 items-center justify-between w-full bg-white desktop:flex-row desktop:h-24 laptop:flex-row laptop:h-24 tablet:flex-col tablet:h-60 tablet:p-8 ">
             <div>
                 <div className="w-24 h-24 bg-sky-400">
-                    {artWork ? <img 
-                        src={artWork} alt="artwork" 
+                    {artWorkSong ? <img 
+                        src={artWorkSong} alt="artwork" 
                         className='h-full'
                     >
                     </img>:""}
@@ -79,7 +77,7 @@ const Player = ({MyMusics,playId}) => {
             </div>
 
             <div>
-                <audio controls autoplay>
+                <audio controls autoPlay>
                     <source src={song} type="audio/mp3"></source>
                 </audio>
             </div>
