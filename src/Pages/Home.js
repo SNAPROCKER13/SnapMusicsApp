@@ -55,7 +55,11 @@ const Home = () => {
       
     }
 
-    console.log(MyMusics)
+    const onEnter = (e) => {
+        if (e.key === "Enter"){
+            handleFind()
+        }
+    }
 
     return(
         <div className="h-full flex flex-col items-center">
@@ -63,7 +67,7 @@ const Home = () => {
                 <Header/>
             </div>
             <div className='my-12 w-full text-center'>
-                <input onChange={(e) => handleSearch(e)} className="border-2 border-black-300 rounded-lg border-2 mx-6 w-6/12" placeholder='  ค้นหา'/>
+                <input onChange={(e) => handleSearch(e)} onKeyDown={(e) => {onEnter(e)}} className="border-2 border-black-300 rounded-lg border-2 mx-6 w-6/12" placeholder='  ค้นหา'/>
                 <button onClick={() => handleFind()} className='border-2 border-black-300 rounded-lg bg-sky-400 text-white border-2 '>ค้นหา</button>
             </div>
             <div className='w-full h-screen'>
