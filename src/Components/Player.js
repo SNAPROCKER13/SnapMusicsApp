@@ -24,7 +24,7 @@ const Player = ({MyMusics,playId}) => {
 
         const MyMusic = MyMusics.map((item) => {
 
-            if(item.id == playId){
+            if(item?.id == playId){
                return (item)
             }
     
