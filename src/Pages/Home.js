@@ -36,7 +36,7 @@ const Home = () => {
 
             getMyMusics().then((res)=>{
                 const arr =  []
-                const result = res.data.map((item) => {
+                res.data.map((item) => {
                     if(item?.title?.includes(text)){
                         arr.push(item)
                         return arr
@@ -60,8 +60,6 @@ const Home = () => {
             handleFind()
         }
     }
-
-    console.log(searchResult)
 
     return(
         <div className={searchResult.length > 0 ? "h-full flex flex-col items-center" : "h-lvh flex flex-col items-center"}>

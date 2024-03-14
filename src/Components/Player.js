@@ -50,7 +50,7 @@ const Player = ({MyMusics,playId}) => {
 
         setSong(song)
 
-    },[playId])
+    })
 
     return(
         <div className="px-12 border-2 border-black flex fixed  bottom-0 items-center justify-between w-full bg-white desktop:flex-row desktop:h-24 laptop:flex-row laptop:h-24 tablet:flex-col tablet:h-60 tablet:p-8 ">
