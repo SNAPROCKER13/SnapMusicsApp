@@ -3,6 +3,9 @@ import Header from '../Components/Header'
 import Content from '../Components/Content'
 import Player from '../Components/Player'
 
+//useSound
+import useSound from "use-sound"; // for handling the sound
+
 //MyMusic
 import  {getMyMusics}  from '../services/GetMyMusicsAPI';
 
@@ -24,12 +27,14 @@ import sixImage from '../Assets/image/6.jpg'
 const Home = () => {
 
     const [MyMusics, setMyMusics] = useState([])
-    const [playId, setPlayId] = useState(0)
+    const [playId, setPlayId] = useState(1)
     const [searchResult, setSearchResult] = useState([])
     const [text, setText] = useState("")
-    const [playSongs, setPlaySongs] = useState({})
-    const [artWorkSong, setArtWorkSong] = useState({})
+    const [playSongs, setPlaySongs] = useState(MyMusics[0])
+    const [artWorkSong, setArtWorkSong] = useState(oneImage)
     const [song, setSong] = useState(lovesecret)
+    const [play, { pause, duration, sound }] = useSound(song);
+    const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
 
@@ -73,6 +78,7 @@ const Home = () => {
 
         getMyMusics().then( async (res)=>{
             await setMyMusics(res.data)
+            await setPlaySongs(res.data[0])
             await setSearchResult(res.data)
         }).catch((err) => console.log(err)
         )
@@ -127,10 +133,10 @@ const Home = () => {
                 <button onClick={() => handleFind()} className='border-2 border-black-300 rounded-lg bg-sky-400 text-white border-2 '>ค้นหา</button>
             </div>
             <div className={'h-full'}>
-                <Content searchResult={searchResult} setPlayId={setPlayId}/>
+                <Content searchResult={searchResult} setPlayId={setPlayId} play={play} pause={pause} setIsPlaying={setIsPlaying} isPlaying={isPlaying}/>
             </div>
             <div className='w-full'>
-                <Player artWorkSong={artWorkSong} song={song} playSongs={playSongs}/>
+                <Player artWorkSong={artWorkSong} song={song} playSongs={playSongs} playId={playId} play={play} pause={pause} duration={duration} sound={sound} setIsPlaying={setIsPlaying} isPlaying={isPlaying}/>
             </div>
         </div>
     )

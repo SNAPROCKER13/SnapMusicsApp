@@ -5,7 +5,7 @@ import fourImage from '../Assets/image/4.jpg'
 import fiveImage from '../Assets/image/5.jpg'
 import sixImage from '../Assets/image/6.jpg'
 
-const Card = ({MyMusic,setPlayId}) => {
+const Card = ({MyMusic,setPlayId, play, pause, setIsPlaying}) => {
 
     const artWork = MyMusic?.art_work == 'oneImage' ? oneImage : 
     MyMusic?.art_work === 'twoImage' ? twoImage : 
@@ -14,15 +14,21 @@ const Card = ({MyMusic,setPlayId}) => {
     MyMusic?.art_work === 'fiveImage' ? fiveImage :
     MyMusic?.art_work === 'sixImage' ? sixImage : ""
 
+    const onChangeSong = () => {
+          pause(); // this will pause the audio
+          setIsPlaying(false);
+      };
+
     return (
         <div className="bg-white w-80 flex flex-col justify-center items-center p-4 rounded-lg">
             <div className="bg-sky-400 w-72 h-72 text-center text-white flex justify-center items-center rounded-lg">
                 <img 
                     src={artWork} alt="artwork" 
                     className='h-full rounded-lg'
-                    onClick={async () =>
+                    onClick={async () =>{
+                        await onChangeSong()
                         await setPlayId(MyMusic?.id)
-                    }
+                    }}
                 ></img>
             </div>
             <div className="my-6 pt-4">

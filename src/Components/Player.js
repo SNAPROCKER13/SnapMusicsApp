@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
-import useSound from "use-sound"; // for handling the sound
 
 import previousIcon from '../Assets/icons/previous.png'
 import playIcon from '../Assets/icons/play.png'
 import pauseIcon from '../Assets/icons/pause.png'
 import nextIcon from '../Assets/icons/next.png'
 
-const Player = ({artWorkSong,song,playSongs}) => {
+const Player = ({artWorkSong,playSongs,play,pause,duration,sound, setIsPlaying, isPlaying}) => {
 
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [play, { pause, duration, sound }] = useSound(song);
     const [currTime, setCurrTime] = useState({
         min: "",
         sec: "",
