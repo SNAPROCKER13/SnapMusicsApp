@@ -20,7 +20,9 @@ const Card = ({MyMusic,setPlayId}) => {
                 <img 
                     src={artWork} alt="artwork" 
                     className='h-full rounded-lg'
-                    onClick={()=>setPlayId(MyMusic?.id)}
+                    onClick={async () =>
+                        await setPlayId(MyMusic?.id)
+                    }
                 ></img>
             </div>
             <div className="my-6 pt-4">

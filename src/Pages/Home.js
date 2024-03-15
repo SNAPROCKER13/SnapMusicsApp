@@ -6,18 +6,74 @@ import Player from '../Components/Player'
 //MyMusic
 import  {getMyMusics}  from '../services/GetMyMusicsAPI';
 
+//image and songs
+import again from '../Assets/songs/again.mp3'
+import brain from '../Assets/songs/brain.mp3'
+import fool from '../Assets/songs/fool.mp3'
+import forget from '../Assets/songs/forget.mp3'
+import lovesecret from '../Assets/songs/lovesecret.mp3'
+import reason from '../Assets/songs/reason.mp3'
+
+import oneImage from '../Assets/image/1.jpg'
+import twoImage from '../Assets/image/2.jpg'
+import theeImage from '../Assets/image/3.jpg'
+import fourImage from '../Assets/image/4.jpg'
+import fiveImage from '../Assets/image/5.jpg'
+import sixImage from '../Assets/image/6.jpg'
+
 const Home = () => {
 
     const [MyMusics, setMyMusics] = useState([])
     const [playId, setPlayId] = useState(0)
     const [searchResult, setSearchResult] = useState([])
     const [text, setText] = useState("")
+    const [playSongs, setPlaySongs] = useState({})
+    const [artWorkSong, setArtWorkSong] = useState({})
+    const [song, setSong] = useState(lovesecret)
+
+    useEffect(() => {
+
+        const selectSong = async () => {
+
+            const MyMusic = await MyMusics.map((item) => {
+
+                if(item?.id == playId){
+                   return (item)
+                }
+        
+            })
+    
+            await setPlaySongs(MyMusic[playId-1])
+    
+            const artWork = playSongs?.art_work == 'oneImage' ? oneImage : 
+            playSongs?.art_work === 'twoImage' ? twoImage : 
+            playSongs?.art_work === 'theeImage' ? theeImage :
+            playSongs?.art_work === 'fourImage' ? fourImage :
+            playSongs?.art_work === 'fiveImage' ? fiveImage :
+            playSongs?.art_work === 'sixImage' ? sixImage : ""
+    
+           await setArtWorkSong(artWork)
+    
+            const song =  playSongs?.file_music == 'lovesecret' ? lovesecret : 
+            playSongs?.file_music === 'forget' ? forget : 
+            playSongs?.file_music === 'again' ? again :
+            playSongs?.file_music === 'fool' ? fool :
+            playSongs?.file_music === 'reason' ? reason :
+            playSongs?.file_music === 'brain' ? brain : ""
+    
+           await setSong(song)
+    
+        }
+
+        selectSong()
+       
+    },[playSongs,playId,song])
 
     useEffect(()=>{
-        
-        getMyMusics().then((res)=>{
-            setMyMusics(res.data)
-            setSearchResult(res.data)
+
+        getMyMusics().then( async (res)=>{
+            await setMyMusics(res.data)
+            await setSearchResult(res.data)
         }).catch((err) => console.log(err)
         )
 
@@ -34,9 +90,9 @@ const Home = () => {
 
         if(text != ""){
 
-            getMyMusics().then((res)=>{
+            getMyMusics().then( async (res)=>{
                 const arr =  []
-                res.data.map((item) => {
+                await res.data.map((item) => {
                     if(item?.title?.includes(text)){
                         arr.push(item)
                         return arr
@@ -74,7 +130,7 @@ const Home = () => {
                 <Content searchResult={searchResult} setPlayId={setPlayId}/>
             </div>
             <div className='w-full'>
-                <Player MyMusics={MyMusics} playId={playId}/>
+                <Player artWorkSong={artWorkSong} song={song} playSongs={playSongs}/>
             </div>
         </div>
     )

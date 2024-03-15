@@ -3,8 +3,7 @@ import {useState} from 'react'
 import bcrypt from "bcryptjs";
 import { getUsers } from '../services/PostUserAPI'
 
-const Login = ({setIsLogin}) => {
-    const navigate = useNavigate();
+const Login = () => {
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const [validate, setValidate] = useState({

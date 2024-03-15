@@ -1,56 +1,53 @@
 import { useEffect, useState } from 'react';
+import useSound from "use-sound"; // for handling the sound
 
-import again from '../Assets/songs/again.mp3'
-import brain from '../Assets/songs/brain.mp3'
-import fool from '../Assets/songs/fool.mp3'
-import forget from '../Assets/songs/forget.mp3'
-import lovesecret from '../Assets/songs/lovesecret.mp3'
-import reason from '../Assets/songs/reason.mp3'
+import previousIcon from '../Assets/icons/previous.png'
+import playIcon from '../Assets/icons/play.png'
+import pauseIcon from '../Assets/icons/pause.png'
+import nextIcon from '../Assets/icons/next.png'
 
-import oneImage from '../Assets/image/1.jpg'
-import twoImage from '../Assets/image/2.jpg'
-import theeImage from '../Assets/image/3.jpg'
-import fourImage from '../Assets/image/4.jpg'
-import fiveImage from '../Assets/image/5.jpg'
-import sixImage from '../Assets/image/6.jpg'
+const Player = ({artWorkSong,song,playSongs}) => {
 
-const Player = ({MyMusics,playId}) => {
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [play, { pause, duration, sound }] = useSound(song);
+    const [currTime, setCurrTime] = useState({
+        min: "",
+        sec: "",
+      }); 
+    const [seconds, setSeconds] = useState();
 
-    const [playSongs, setPlaySongs] = useState({})
-    const [artWorkSong, setArtWorkSong] = useState({})
-    const [song, setSong] = useState({})
-
-    useEffect(() => {
-
-        const MyMusic = MyMusics.map((item) => {
-
-            if(item?.id == playId){
-               return (item)
-            }
+    const sec = duration / 1000;
+    const min = Math.floor(sec / 60);
+    const secRemain = Math.floor(sec % 60);
+    const time = {
+    min: min,
+    sec: secRemain
+    };
     
-        })
+    const playingButton = () => {
+        if (isPlaying) {
+          pause(); // this will pause the audio
+          setIsPlaying(false);
+        } else {
+          play(); // this will play the audio
+          setIsPlaying(true);
+        }
+      };
 
-        setPlaySongs(MyMusic[playId-1])
-
-        const artWork = playSongs?.art_work == 'oneImage' ? oneImage : 
-        playSongs?.art_work === 'twoImage' ? twoImage : 
-        playSongs?.art_work === 'theeImage' ? theeImage :
-        playSongs?.art_work === 'fourImage' ? fourImage :
-        playSongs?.art_work === 'fiveImage' ? fiveImage :
-        playSongs?.art_work === 'sixImage' ? sixImage : ""
-
-        setArtWorkSong(artWork)
-
-        const song = playSongs?.file_music == 'lovesecret' ? lovesecret : 
-        playSongs?.file_music === 'forget' ? forget : 
-        playSongs?.file_music === 'again' ? again :
-        playSongs?.file_music === 'fool' ? fool :
-        playSongs?.file_music === 'reason' ? reason :
-        playSongs?.file_music === 'brain' ? brain : ""
-
-        setSong(song)
-
-    })
+      useEffect(() => {
+        const interval = setInterval(() => {
+          if (sound) {
+            setSeconds(sound.seek([])); // setting the seconds state with the current state
+            const min = Math.floor(sound.seek([]) / 60);
+            const sec = Math.floor(sound.seek([]) % 60);
+            setCurrTime({
+              min,
+              sec,
+            });
+          }
+        }, 1000);
+        return () => clearInterval(interval);
+      }, [sound]);
 
     return(
         <div className="px-12 border-2 border-black flex fixed  bottom-0 items-center justify-between w-full bg-white desktop:flex-row desktop:h-24 laptop:flex-row laptop:h-24 tablet:flex-col tablet:h-60 tablet:p-8 ">
@@ -64,22 +61,34 @@ const Player = ({MyMusics,playId}) => {
                 </div>
             </div>
 
-            <div className="flex w-1/4 justify-between">
-                <div>Previous</div>
-                <div>Range</div>
-                <div>Play</div>
-                <div>Next</div>
+            <div className="flex w-1/4 justify-between items-center">
+                <p>
+                    {currTime.sec > 9 ? `${currTime.min} : ${currTime.sec}` : `${currTime.min} : 0${currTime.sec}`}
+                </p>
+                <img src={previousIcon} alt="previoustIcon" className='h-8 w-8'></img>
+                <input
+                    type="range"
+                    min="0"
+                    max={duration / 1000}
+                    default="0"
+                    value={seconds}
+                    className="timeline"
+                    onChange={(e) => {
+                        sound.seek([e.target.value]);
+                    }}
+                />
+                {!isPlaying ? <img onClick={()=>playingButton()} src={playIcon} alt="playIcon" className='h-8 w-8'></img>
+                :
+                <img onClick={()=>playingButton()} src={pauseIcon} alt="pauseIcon" className='h-8 w-8'></img>}
+                <img src={nextIcon} alt="nextIcon" className='h-8 w-8'></img>
+                <p>
+                    {time.min}:{time.sec}
+                </p>
             </div>
 
             <div className="flex w-1/4 justify-around">
                 <p>Title : {playSongs?.title}</p>
                 <p>Artist : {playSongs?.artist}</p>
-            </div>
-
-            <div>
-                <audio controls autoPlay>
-                    <source src={song} type="audio/mp3"></source>
-                </audio>
             </div>
         </div>
     )
