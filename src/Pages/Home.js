@@ -67,11 +67,16 @@ const Home = () => {
             playSongs?.file_music === 'brain' ? brain : ""
     
            await setSong(song)
-    
+
+           if (isPlaying) {
+                play()// this will play the audio
+                setIsPlaying(true);
+            }
+
         }
 
         selectSong()
-       
+
     },[playSongs,playId,song])
 
     useEffect(()=>{
@@ -80,8 +85,9 @@ const Home = () => {
             await setMyMusics(res.data)
             await setPlaySongs(res.data[0])
             await setSearchResult(res.data)
-        }).catch((err) => console.log(err)
-        )
+        }).catch((err) => console.log(err))
+
+        pause()
 
     },[])
 
@@ -126,7 +132,7 @@ const Home = () => {
     return(
         <div className={searchResult.length > 0 ? "h-full flex flex-col items-center" : "h-lvh flex flex-col items-center"}>
             <div className='w-full'>
-                <Header/>
+                <Header pause={pause} />
             </div>
             <div className='my-12 w-full text-center'>
                 <input onChange={(e) => handleSearch(e)} onKeyDown={(e) => {onEnter(e)}} className="border-2 border-black-300 rounded-lg border-2 mx-6 w-6/12" placeholder='  ค้นหา'/>

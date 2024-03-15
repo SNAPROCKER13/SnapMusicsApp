@@ -43,6 +43,7 @@ const Player = ({artWorkSong,playSongs,play,pause,duration,sound, setIsPlaying, 
             });
           }
         }, 1000);
+
         return () => clearInterval(interval);
       }, [sound]);
 
@@ -74,9 +75,9 @@ const Player = ({artWorkSong,playSongs,play,pause,duration,sound, setIsPlaying, 
                           sound.seek([e.target.value]);
                       }}
                   />
-                  {!isPlaying ? <img onClick={()=>playingButton()} src={playIcon} alt="playIcon" className='h-8 w-8'></img>
+                  {!isPlaying ? <img onClick={()=>playingButton()} src={playIcon} alt="playIcon" className='h-8 w-8 ml-5'></img>
                   :
-                  <img onClick={()=>playingButton()} src={pauseIcon} alt="pauseIcon" className='h-8 w-8'></img>}
+                  <img onClick={()=>playingButton()} src={pauseIcon} alt="pauseIcon" className='h-8 w-8 ml-5'></img>}
                   <img src={nextIcon} alt="nextIcon" className='h-8 w-8 ml-5'></img>
                   <p  className='w-max ml-5'>
                       {time.min}:{time.sec}

@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 import { getUsers } from '../services/PostUserAPI'
 
 const Login = () => {
+    const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState('')
     const [password, setPassword] = useState('')
     const [validate, setValidate] = useState({
@@ -67,6 +68,7 @@ const Login = () => {
             if(userFilter[0] !== undefined){
                 const match = await bcrypt.compare(password, userFilter[0].password)
                 if(match === true){
+                    setIsLoading(true)
                     localStorage.setItem("isLogin",true)
                     window.location.reload()
                 }else{
@@ -85,7 +87,7 @@ const Login = () => {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen ">
+        <div className="flex flex-col items-center justify-center h-screen relative">
 
             <div className="my-10">
                 <h1 className="text-sky-400 text-center font-bold desktop:text-3xl laptop:text-2xl">SNAPMUSICS</h1>
@@ -105,7 +107,9 @@ const Login = () => {
                 className='border-2 rounded-lg bg-sky-400 text-white mb-5'>ยืนยัน</button>
                 <Link to="/register"><p className="text-sky-400 mb-5">Sign-Up</p></Link>
             </div>
-            
+            {isLoading ? <div className="w-full h-screen fixed z-10 flex justify-center items-center" style={{backgroundColor:"rgba(0,0,0,0.6)"}}>
+                <h1 className="text-white animate-pulse">Loading...</h1>
+            </div>:""}
         </div>
     )
 }
